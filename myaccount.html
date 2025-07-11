@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Microsoft Entra Login</title>
+</head>
+<body>
+  <h2>Microsoft Entra Login Demo</h2>
+  <button onclick="signIn()">Sign In</button>
+  <div id="user-info"></div>
+
+  <!-- Load MSAL.js -->
+  https://alcdn.msauth.net/browser/msal-browser.min.js
+
+  <script>
+    const msalConfig = {
+      auth: {
+        clientId: "26d130ae-5e24-4ca9-b213-f74a8f1af4ef",
+        authority: "https://login.microsoftonline.com/014155d2-d3dc-4171-9a8c-dc10212a8614",
+        redirectUri: "http://localhost:3000"
+      }
+    };
+
+    const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+    const loginRequest = {
+      scopes: ["User.Read"]
+    };
+
+    async function signIn() {
+      try {
+        const loginResponse = await msalInstance.loginPopup(loginRequest);
+        const accessToken = loginResponse.accessToken;
+
+        const response = await fetch("https://graph.microsoft.com/v1.0/me", {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        });
+
+        const profile = await response.json();
+        document.getElementById("user-info").innerHTML = `
+          <p><strong>Name:</strong> ${profile.displayName}</p>
+          <p><strong>Email:</strong> ${profile.mail || profile.userPrincipalName}</p>
+        `;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
