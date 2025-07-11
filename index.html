@@ -4,9 +4,61 @@
   <meta charset="UTF-8" />
   <title>Entra ID Login</title>
   <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
-  <h2>Microsoft Entra ID Authentication</h2>
-  <button onclick="signIn()">Sign In</button>
-  <div id="user-info" style="margin-top: 20px;"></div>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+  
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #4e54c8, #8f94fb);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #ffffff;
+      color: #4e54c8;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e0e0ff;
+    }
+
+    #user-info {
+      margin-top: 30px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+
+  </head>
+  <body>
+  <h2>Welcome to NS IT Specialist My Account Login</h2>
+  <button onclick="signIn()">Sign In with your Microsoft Account</button>
+  <button onclick="goHome()">Return to the Weather App</button>
+  <div id="user-info" class="hidden"></div>
 
   <script>
     const msalConfig = {
@@ -42,8 +94,14 @@
           <p><strong>Display Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
         `;
+		document.getElementById("user-info").classList.remove("hidden");
       }
     }
+	
+function goHome() {
+      window.location.href = "https://nsitspecialist.ca"; 
+    }
+
   </script>
 </body>
 </html>
