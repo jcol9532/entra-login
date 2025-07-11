@@ -118,7 +118,7 @@ function updateButtonToLogout() {
 }
 
 function updateButtonToSignIn() {
-  const button = document.querySelector("button[onclick='signIn()']");
+  const button = document.querySelector("button[onclick='signOut()']");
   button.textContent = "Sign In with Microsoft Account";
   button.setAttribute("onclick", "signIn()");
 }
