@@ -112,14 +112,14 @@ function signOut() {
 }
 
 function updateButtonToLogout() {
-  const button = document.querySelector("button[data-auth]");
+  const button = document.querySelector("button[onclick='signIn()']");
   button.textContent = "Log Out";
   button.setAttribute("onclick", "signOut()");
 }
 
 function updateButtonToSignIn() {
-  const button = document.querySelector("button[data-auth]");
-  button.textContent = "Sign In with Microsoft";
+  const button = document.querySelector("button[onclick='signIn()']");
+  button.textContent = "Sign In with Microsoft Account";
   button.setAttribute("onclick", "signIn()");
 }
 
