@@ -102,14 +102,33 @@
 function signOut() {
   msalInstance.logoutPopup({
     postLogoutRedirectUri: window.location.href
+	}).then(() => {
+    clearUserInfo();
+    updateButtonToSignIn();
+  }).catch(error => {
+    console.error("Logout failed:", error);
   });
+
 }
 
 function updateButtonToLogout() {
-  const signInButton = document.querySelector("button[onclick='signIn()']");
-  signInButton.textContent = "Log Out";
-  signInButton.setAttribute("onclick", "signOut()");
+  const button = document.querySelector("button[data-auth]");
+  button.textContent = "Log Out";
+  button.setAttribute("onclick", "signOut()");
 }
+
+function updateButtonToSignIn() {
+  const button = document.querySelector("button[data-auth]");
+  button.textContent = "Sign In with Microsoft";
+  button.setAttribute("onclick", "signIn()");
+}
+
+function clearUserInfo() {
+  const userInfoDiv = document.getElementById("user-info");
+  userInfoDiv.innerHTML = "";
+  userInfoDiv.classList.add("hidden");
+}
+
 
     function showUserInfo(account) {
       if (account) {
